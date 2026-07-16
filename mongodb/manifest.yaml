@@ -58,9 +58,10 @@ spec:
         - name: mongodb
           mountPath: /data/db
   # pvc
-  volumeClaimTemplates:
-  - metadata:
-      name: mongodb
+  
+volumeClaimTemplates:
+- metadata:
+    name: mongodb
   spec:
     accessModes:
     - ReadWriteOnce
@@ -68,6 +69,7 @@ spec:
     resources:
       requests:
         storage: 1Gi
+
 ---
 apiVersion: v1
 kind: Service
