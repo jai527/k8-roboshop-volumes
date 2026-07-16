@@ -24,25 +24,20 @@ spec:
 ---
 apiVersion: apps/v1
 kind: StatefulSet
-
 metadata:
   name: mongodb
   namespace: roboshop
-  labels:
-    project: roboshop
-    environment: dev
-    tier: db
-    component: mongodb
 spec:
-  replicas: 3
   serviceName: mongodb-headless
+  replicas: 3
+
   selector:
     matchLabels:
       project: roboshop
       environment: dev
       tier: db
       component: mongodb
-  # pod deffinition 
+
   template:
     metadata:
       labels:
@@ -57,19 +52,17 @@ spec:
         volumeMounts:
         - name: mongodb
           mountPath: /data/db
-  # pvc
-  
-volumeClaimTemplates:
-- metadata:
-    name: mongodb
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    storageClassName: roboshop-ebs
-    resources:
-      requests:
-        storage: 1Gi
 
+  volumeClaimTemplates:
+  - metadata:
+      name: mongodb
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: roboshop-ebs
+      resources:
+        requests:
+          storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
