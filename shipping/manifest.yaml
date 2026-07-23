@@ -9,11 +9,9 @@ metadata:
     environment: dev
     tier: backend
     component: shipping
-
 data:
   CART_ENDPOINT: "cart:8080"
   DB_HOST: "mysql"
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -65,7 +63,7 @@ spec:
             port: 8080
           failureThreshold: 2
           periodSeconds: 10
-          initialDelaySeconds: 15
+          initialDelaySeconds: 60
         livenessProbe:
           httpGet:
             path: /health
